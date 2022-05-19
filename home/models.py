@@ -1,4 +1,5 @@
 from django.db import models
+import django.utils.timezone as timezone
 
 # 预案编制
 class PlanyType(models.Model):
@@ -9,7 +10,7 @@ class PlanyType(models.Model):
     type_name = models.CharField(verbose_name="编制名称", max_length=30, unique=True)
     type_desc = models.TextField(verbose_name="编制描述")
     type_status = models.BooleanField(verbose_name="编制状态", default=1)
-    add_time = models.DateTimeField(verbose_name="创建时间", auto_now_add=True)
+    add_time = models.DateTimeField(verbose_name="创建时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="修改时间", auto_now=True)
 
     def __str__(self):
@@ -29,7 +30,7 @@ class PlanyTemplate(models.Model):
     create_time = models.DateTimeField(verbose_name="编制时间", auto_now=True)
     use_info = models.TextField(verbose_name="使用说明", null=True, blank=True)
     description = models.TextField(verbose_name="模板描述", null=True, blank=True)
-    add_time = models.DateTimeField(verbose_name="描述信息", auto_now_add=True)
+    add_time = models.DateTimeField(verbose_name="描述信息", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="修改时间", auto_now=True)
 
     def __str__(self):
@@ -49,7 +50,7 @@ class Plans(models.Model):
     plan_implementer = models.CharField(verbose_name="预案实施人", null=True, blank=True, max_length=100)
     plan_des = models.TextField(verbose_name="方案描述", null=True, blank=True)
     plan_detail = models.TextField(verbose_name="方案细节", null=True)
-    add_time = models.DateTimeField(verbose_name="创建时间", auto_now_add=True)
+    add_time = models.DateTimeField(verbose_name="创建时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="修改时间", auto_now=True)
 
     def __str__(self):
@@ -64,7 +65,7 @@ class City(models.Model):
 
     city_name = models.CharField(verbose_name="城市名称", max_length=30, unique=True)
     # type_status = models.BooleanField(verbose_name="类型状态", default=1)
-    add_time = models.DateTimeField(verbose_name="创建时间", auto_now_add=True)
+    add_time = models.DateTimeField(verbose_name="创建时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="修改时间", auto_now=True)
 
     def __str__(self):
@@ -79,11 +80,11 @@ class Assessment(models.Model):
 
     assessment_name = models.CharField(verbose_name="评估名称", max_length=30, unique=True)
     assessment_description = models.TextField(verbose_name="评估描述")
-    file = models.FileField(verbose_name="评估附件", upload_to='upload/user')
+    file = models.FileField(verbose_name="评估文件", upload_to='upload/user')
     plan = models.ForeignKey("Plans", verbose_name="方案名称", on_delete=models.DO_NOTHING)
     city = models.ForeignKey("City", verbose_name="评估城市", on_delete=models.DO_NOTHING)
     assessment_user = models.CharField(verbose_name="评估人", max_length=100)
-    add_time = models.DateTimeField(verbose_name="评估时间", auto_now_add=True)
+    add_time = models.DateTimeField(verbose_name="评估时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="修改时间", auto_now=True)
 
     def __str__(self):

@@ -1,6 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-
+import django.utils.timezone as timezone
 
 class News(models.Model):
     class Meta:
@@ -11,7 +11,7 @@ class News(models.Model):
     email = models.CharField(verbose_name="邮箱", max_length=30)
     phone = models.CharField(verbose_name="联系电话", max_length=30)
     des = RichTextField(verbose_name="详情", blank=True, null=True)
-    add_time = models.DateTimeField(verbose_name="留言时间", auto_now_add=True)
+    add_time = models.DateTimeField(verbose_name="留言时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="修改时间", auto_now=True)
 
     def __str__(self):
@@ -24,7 +24,7 @@ class HelpUrl(models.Model):
 
     web_name = models.CharField(verbose_name="网站名称", max_length=100, unique=True)
     href = models.TextField(verbose_name="友情链接")
-    add_time = models.DateTimeField(verbose_name="添加时间", auto_now_add=True)
+    add_time = models.DateTimeField(verbose_name="添加时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="修改时间", auto_now=True)
 
     def __str__(self):

@@ -2,7 +2,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 from django.utils.safestring import mark_safe
 import datetime
-
+import django.utils.timezone as timezone
 # 事件类型
 class EventType(models.Model):
     class Meta:
@@ -11,7 +11,7 @@ class EventType(models.Model):
 
     type_name = models.CharField(verbose_name="类型名称", max_length=30, unique=True)
     # type_status = models.BooleanField(verbose_name="类型状态", default=1)
-    add_time = models.DateTimeField(verbose_name="创建时间", auto_now_add=True)
+    add_time = models.DateTimeField(verbose_name="创建时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="修改时间", auto_now=True)
 
     def __str__(self):
@@ -32,7 +32,7 @@ class Message(models.Model):
     create_user = models.CharField(verbose_name="发布部门", max_length=30)
     status = models.CharField(verbose_name="类型状态", choices=status_choices, max_length=1, default="1")
     des = RichTextField(verbose_name="信息详情", blank=True, null=True)
-    add_time = models.DateTimeField(verbose_name="发布时间", auto_now_add=True)
+    add_time = models.DateTimeField(verbose_name="发布时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="处理时间", auto_now=True)
 
     def __str__(self):
@@ -58,9 +58,9 @@ class Events(models.Model):
     event_desc = models.TextField(verbose_name="事件描述", null=True)
     processing_results= models.TextField(verbose_name="处理结果", null=True)
     event_type = models.ManyToManyField("EventType", verbose_name="事件类型")
-    create_time = models.DateTimeField(verbose_name="发生时间", auto_now_add=True)
-    open_time = models.DateTimeField(verbose_name="发布时间", auto_now_add=True)
-    add_time = models.DateTimeField(verbose_name="创建时间", auto_now_add=True)
+    create_time = models.DateTimeField(verbose_name="发生时间", default=timezone.now)
+    open_time = models.DateTimeField(verbose_name="发布时间", default=timezone.now)
+    add_time = models.DateTimeField(verbose_name="创建时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="处理时间", auto_now=True)
 
     def __str__(self):
