@@ -28,4 +28,4 @@ class HelpAdmin(admin.ModelAdmin):
         return format_html(
             "<a href='{0}' target='_blank'>{0}</a>".format(obj.href))
 
-    show_firm_url.short_description = "友情链接列表"
+    show_firm_url.short_description = "网站网址"

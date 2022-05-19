@@ -23,7 +23,7 @@ class HelpUrl(models.Model):
         verbose_name_plural = "友情链接"
 
     web_name = models.CharField(verbose_name="网站名称", max_length=100, unique=True)
-    href = models.TextField(verbose_name="友情链接")
+    href = models.TextField(verbose_name="网站网址")
     add_time = models.DateTimeField(verbose_name="添加时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="修改时间", auto_now=True)
 
