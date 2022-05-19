@@ -66,10 +66,17 @@ class EventAdminSite(admin.AdminSite):
 # 预案编制
 @admin.register(PlanyType)
 class PlanyTypeAdmin(admin.ModelAdmin):
-    list_display = ["type_name", "type_desc", "type_status", "add_time", "modify_time"]
+    list_display = ["type_name", "type_desc_str", "type_status", "add_time", "modify_time"]
     search_fields = ["type_name"]
     list_per_page = 50
     list_filter = ["type_name"]
+
+    def type_desc_str(self, obj):
+        if len(obj.type_desc) >= 10:
+            return obj.type_desc[0:10] + "..."
+        return obj.type_desc
+
+    type_desc_str.short_description = "编制描述"
 
 
 # 方案模板管理
