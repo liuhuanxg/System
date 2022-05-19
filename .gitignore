@@ -1,4 +1,4 @@
-*/__pycache__/
+__pycache__
 .idea
 *.py[cod]
 *$py.class
@@ -6,5 +6,5 @@ migrations
 static/upload
 static/Cesium/
 static/Rectangle/
-logs
+logs/*
 *.zip
