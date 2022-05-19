@@ -30,7 +30,7 @@ class EventsAdmin(admin.ModelAdmin):
 # 信息接收
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ["title_name", "create_user", "add_time", "show_firm_url", "des_html"]
+    list_display = ["title_name", "create_user", "add_time", "show_firm_url"]
     search_fields = ["title_name", "status"]
     list_per_page = 50
     list_filter = ["status"]
@@ -44,6 +44,11 @@ class MessageAdmin(admin.ModelAdmin):
             MessageAdmin.fieldsets = (
                 ("基本信息", {'fields': ['title_name', 'create_user', "status"]}),
                 ("介绍", {'fields': ['des_html']})
+            )
+        else:
+            MessageAdmin.fieldsets = (
+                ("基本信息", {'fields': ['title_name', 'create_user', "status"]}),
+                ("介绍", {'fields': ['des']})
             )
         return super().change_view(
             request, object_id, form_url, extra_context=extra_context,
@@ -73,8 +78,4 @@ class MessageAdmin(admin.ModelAdmin):
         return message
 
     show_firm_url.short_description = "操作"
-    formfield_overrides = {
-        models.TextField: {'widget': Message.des},
-    }
     readonly_fields = ["des_html"]
-
