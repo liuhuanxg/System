@@ -33,6 +33,7 @@ class Message(models.Model):
     status = models.CharField(verbose_name="类型状态", choices=status_choices, max_length=1, default="1")
     des = RichTextField(verbose_name="信息详情", blank=True, null=True)
     add_time = models.DateTimeField(verbose_name="发布时间", default=timezone.now)
+    happend_time = models.DateTimeField(verbose_name="发生时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="处理时间", auto_now=True)
 
     def __str__(self):

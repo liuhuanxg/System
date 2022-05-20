@@ -30,7 +30,7 @@ class EventsAdmin(admin.ModelAdmin):
 # 信息接收
 @admin.register(Message)
 class MessageAdmin(admin.ModelAdmin):
-    list_display = ["title_name", "create_user", "add_time", "show_firm_url"]
+    list_display = ["title_name", "create_user", "happend_time", "add_time", "show_firm_url"]
     search_fields = ["title_name", "status"]
     list_per_page = 50
     list_filter = ["status"]
@@ -42,12 +42,12 @@ class MessageAdmin(admin.ModelAdmin):
         permissions = request.user.get_all_permissions()
         if 'emergency_management.change_message' not in permissions or 'emergency_management.add_message' not in permissions:
             MessageAdmin.fieldsets = (
-                ("基本信息", {'fields': ['title_name', 'create_user', "status"]}),
+                ("基本信息", {'fields': ['title_name', 'create_user', "status", "happend_time", "add_time"]}),
                 ("介绍", {'fields': ['des_html']})
             )
         else:
             MessageAdmin.fieldsets = (
-                ("基本信息", {'fields': ['title_name', 'create_user', "status"]}),
+                ("基本信息", {'fields': ['title_name', 'create_user', "status", "happend_time", "add_time"]}),
                 ("介绍", {'fields': ['des']})
             )
         return super().change_view(

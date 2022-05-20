@@ -1,6 +1,7 @@
 from django.db import models
 import django.utils.timezone as timezone
 
+
 # 预案编制
 class PlanyType(models.Model):
     class Meta:
@@ -25,12 +26,13 @@ class PlanyTemplate(models.Model):
 
     template_name = models.CharField(verbose_name="模板名称", max_length=30, unique=True)
     ersion_num = models.CharField(verbose_name="版本号", max_length=30)
+    file = models.FileField(upload_to='upload/user', verbose_name="详细文件", blank=True, null=True)
     company_name = models.CharField(verbose_name="编制单位", max_length=30)
     create_user = models.CharField(verbose_name="编制人", max_length=30)
-    create_time = models.DateTimeField(verbose_name="编制时间", auto_now=True)
+    create_time = models.DateTimeField(verbose_name="编制时间", auto_now=timezone.now)
     use_info = models.TextField(verbose_name="使用说明", null=True, blank=True)
     description = models.TextField(verbose_name="模板描述", null=True, blank=True)
-    add_time = models.DateTimeField(verbose_name="描述信息", default=timezone.now)
+    add_time = models.DateTimeField(verbose_name="描述时间", default=timezone.now)
     modify_time = models.DateTimeField(verbose_name="修改时间", auto_now=True)
 
     def __str__(self):
