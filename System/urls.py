@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.views.static import serve
-from django.urls import path, include,re_path
+from django.urls import path, include, re_path
 from System.settings import MEDIA_ROOT
+
 urlpatterns = [
-path('emergency_management/', include("emergency_management.urls", namespace="emergency_management")),
-    re_path(r'^media/(?P<path>.*)', serve, {"document_root":MEDIA_ROOT}),  # 添加的代码
+    path('emergency_management/', include("emergency_management.urls", namespace="emergency_management")),
+    re_path(r'^media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
     path('', admin.site.urls),
 
 ]
