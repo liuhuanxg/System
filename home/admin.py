@@ -145,14 +145,14 @@ def index_decorator(func):
         app_list.sort(key=lambda r: find_app_index(r['app_label']))
         # print("app_list:", app_list)
         for app in app_list:
-            print("app:{}".format(app))
+            # print("app:{}".format(app))
             if app["app_label"] == "home":
                 # 按照指定顺序排序
                 models = app["models"]
                 new_models = []
                 for i in models:
                     model_name = i["object_name"]
-                    print("model_name:{}".format(model_name))
+                    # print("model_name:{}".format(model_name))
                     pos = apps_index.index(model_name)
                     new_models.append({"pos": pos, "model": i})
                 new_models.sort(key=lambda s: s["pos"])

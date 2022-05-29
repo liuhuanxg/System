@@ -20,6 +20,7 @@ from System.settings import MEDIA_ROOT
 
 urlpatterns = [
     path('emergency_management/', include("emergency_management.urls", namespace="emergency_management")),
+    path('home/', include("home.urls", namespace="home")),
     re_path(r'^media/(?P<path>.*)', serve, {"document_root": MEDIA_ROOT}),
     path('', admin.site.urls),
 

@@ -6,7 +6,7 @@ from django.contrib import admin
 
 
 urlpatterns = [
-
+    path("query_user/", query_user)
 ]
 
 app_name = "home"
